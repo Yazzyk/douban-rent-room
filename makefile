@@ -11,7 +11,6 @@ build:
 	make build_darwin
 	make build_linux_arm
 	make build_darwin_arm
-	make build_docker
 
 build_linux:
 	@echo "linux版"

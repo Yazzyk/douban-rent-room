@@ -13,12 +13,17 @@ go mod tidy
 ```
 
 #### 3. 修改配置文件
-根据个人情况修改config.toml
+根据个人情况修改`config.toml`
 
 #### 4. 运行代码
 ```bash
 go run main.go 
 ```
+
+### 从Realease下载运行
+1. 前往[Release](https://github.com/Yazzyk/douban-rent-room/releases)下载对应平台的压缩包
+2. 根据个人需要修改配置文件`config.toml`(配置文件和可执行文件要在同一个目录下)
+3. 运行程序
 
 ## 本地构建
 ```bash
