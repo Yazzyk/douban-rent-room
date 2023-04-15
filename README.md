@@ -12,7 +12,10 @@ cd douban-rent-room
 go mod tidy
 ```
 
-#### 3. 运行代码
+#### 3. 修改配置文件
+根据个人情况修改config.toml
+
+#### 4. 运行代码
 ```bash
 go run main.go 
 ```
