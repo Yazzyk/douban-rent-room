@@ -24,4 +24,4 @@ jobs:
       run: go mod tidy
       
     - name: Build
-      run: go build -v -o douban_rent_room ./...
+      run: go build -v -o douban_rent_room ./../main.go
