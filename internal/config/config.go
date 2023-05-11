@@ -1,7 +1,9 @@
 package config
 
 import (
+	"fmt"
 	"github.com/BurntSushi/toml"
+	"os"
 )
 
 type AppConfig struct {
@@ -51,7 +53,11 @@ type LoggerConfig struct {
 var App AppConfig
 
 func Setup() {
-	if _, err := toml.DecodeFile("config.toml", &App); err != nil {
+	confFile := "config.toml"
+	if len(os.Args) >= 2 {
+		confFile = fmt.Sprintf("config_%s.toml", os.Args[1])
+	}
+	if _, err := toml.DecodeFile(confFile, &App); err != nil {
 		panic("配置文件解析错误:" + err.Error())
 		return
 	}
