@@ -1,6 +1,6 @@
 # 豆瓣租房信息爬取
 
-> 目前个人已测试深圳ok，理论上其它城市也ok，只要修改配置文件中修改`WebSite`的地址到对应的城市的豆瓣租房小组地址即可
+> 目前个人已测试深圳可用，理论上其它城市也可用，只要修改配置文件中修改`WebSite`的地址到对应的城市的豆瓣租房小组地址即可
 > 如：成都的租房小组地址是 [https://www.douban.com/group/CDzufang/discussion](https://www.douban.com/group/CDzufang/discussion) ,把配置文件中换成对应url即可
 
 ## 如何运行项目
