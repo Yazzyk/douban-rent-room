@@ -8,6 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/yazzyk/douban-rent-room/internal/config"
 	"github.com/yazzyk/douban-rent-room/internal/models"
+	"os"
 	"time"
 )
 
@@ -15,7 +16,6 @@ func Run() (result []models.HouseInfo) {
 	logrus.Info("开始爬取数据")
 	start := 0
 	endTime := time.Now().Add(-time.Duration(config.App.Spider.TimeLimit) * 24 * time.Hour)
-
 	for {
 		pageResp, err := resty.New().R().SetHeader("Cookie", config.App.Spider.Cookie).Get(fmt.Sprintf("%s?start=%d&type=new", config.App.Spider.WebSite, start))
 		if err != nil {
@@ -46,7 +46,12 @@ func Run() (result []models.HouseInfo) {
 			})
 		})
 
-		if result[len(result)-1].Date.Unix() < endTime.Unix() {
+		if len(result) == 0 {
+			logrus.Error("未获取到数据")
+			os.WriteFile("logs/index.html", []byte(doc.Text()), os.ModePerm)
+		}
+
+		if len(result) != 0 && result[len(result)-1].Date.Unix() < endTime.Unix() {
 			logrus.Infof("共有%d条", len(result))
 			return
 		}

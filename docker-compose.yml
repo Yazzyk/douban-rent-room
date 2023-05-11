@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  douban:
+    image: yazzyk/douban:${VERSION}
+    container_name: douban
+    volumes:
+      - ${DOUBAN_ROOT}/config.toml:/app/config.toml
+      - ${DOUBAN_ROOT}/logs:/app/logs

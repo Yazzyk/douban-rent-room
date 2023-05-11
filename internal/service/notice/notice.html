@@ -32,16 +32,33 @@
             width: 200px;
             /*border: 1px solid #ccc;*/
             border-radius: 8px;
-            background-color: #ccc;
+            background-color: #99CCFF;
             padding: 10px;
             margin-bottom: 10px;
             text-align: center;
+        }
+        .more {
+            width: 150px;
+            height: 30px;
+            color: #fff;
+            text-align: center;
+            display: block;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            background: #333399;
+            text-decoration: none;
+            line-height: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 <h1>房源信息</h1>
 <p>近{{.Day}}天的房源信息如下，请及时查看</p>
+<a class="more" href="{{.Domain}}/info" οnclick="return false;">获取最新</a>
 <p>屏蔽关键词: {{.Black}}</p>
 <div class="infos">
     {{range .Data}}

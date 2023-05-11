@@ -9,7 +9,11 @@ type AppConfig struct {
 	Spider    SpiderConfig
 	DataClean DataCleanConfig
 	Logger    LoggerConfig
-	Notice    struct {
+	Api       struct {
+		Domain string
+		Port   int
+	}
+	Notice struct {
 		WxPusher struct {
 			Enable   bool
 			AppToken string

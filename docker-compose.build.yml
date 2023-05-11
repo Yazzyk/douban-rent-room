@@ -1,0 +1,6 @@
+services:
+  douban-rent-room:
+    image: yazzyk/douban:${VERSION}
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
