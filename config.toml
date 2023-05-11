@@ -9,12 +9,12 @@ Port = 5050
 # 爬虫
 [Spider]
 WebSite = "https://www.douban.com/group/szsh/discussion" # 定义爬取的网站
-Cookie = ''
+Cookie = 'bid=y-UuJ46cnMo; dbcl2="20479895:iqVnAcUuaDs"; ck=IBD_; push_noty_num=0; push_doumail_num=0; __utma=30149280.451836318.1683804630.1683804630.1683804630.1; __utmc=30149280; __utmz=30149280.1683804630.1.1.utmcsr=accounts.douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmt=1; __utmv=30149280.2047; __utmb=30149280.16.5.1683804652037'
 TimeLimit = 5 # 定义爬取的时间限制 /天
 
 # 数据清洗
 [DataClean]
-BlackList = ["合租", "求", "找", "盐田", "龙岗", "坪山", "大鹏", "宝安", "光明", "单间", "一室", "一房", "女生"] # 定义爬取的黑名单列表
+BlackList = ["合租", "求", "找", "盐田", "龙岗", "坪山", "大鹏", "宝安", "光明", "单间", "一室", "一房", "女生"]
 
 [Logger]
 Level = "debug"
@@ -25,13 +25,13 @@ Path = "logs/run.log"
 [Notice]
 [Notice.WxPusher]
 Enable = false #是否开启
-AppToken = '' # 微信推送的AppToken
-Uids = [''] # 微信推送的UID
+AppToken = 'AT_1yhG0QTQH7uSQR5wUifN95TZE0XT7fvX' # 微信推送的AppToken
+Uids = ['UID_YyAW7HKrtgKUL21lGubAJ921pJ8a', 'UID_iHVPCFtGxNdd3uEqJKaDUwzsBmRa'] # 微信推送的UID
 [Notice.Email]
 Enable = true # 是否开启
 From = '豆瓣房源爬虫 <notice@shroot.dev>' # 邮件发送人
 User = 'notice@shroot.dev' # 邮箱账号
-Pwd = '' # 邮箱密码
+Pwd = 'qYDRanrdSVxC81f6' # 邮箱密码
 SmtpAddr = 'smtphz.qiye.163.com:25' # 邮件服务器
 Host = 'smtphz.qiye.163.com' # 邮件服务器
-To = [''] # 邮件接收人
+To = ['go_010@qq.com', '1352990781@qq.com'] # 邮件接收人

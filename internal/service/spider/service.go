@@ -49,6 +49,7 @@ func Run() (result []models.HouseInfo) {
 		if len(result) == 0 {
 			logrus.Error("未获取到数据")
 			os.WriteFile("logs/index.html", []byte(doc.Text()), os.ModePerm)
+			return
 		}
 
 		if len(result) != 0 && result[len(result)-1].Date.Unix() < endTime.Unix() {
