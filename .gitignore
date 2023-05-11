@@ -1,0 +1,5 @@
+/build/
+/config_dev.toml
+/logs/
+.idea
+.DS_Store
