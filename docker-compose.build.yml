@@ -4,3 +4,8 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ./
+  douban-rent-room-latest:
+    image: yazzyk/douban
+    build:
+      dockerfile: ./Dockerfile
+      context: ./

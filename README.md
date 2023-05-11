@@ -4,6 +4,31 @@
 > 如：成都的租房小组地址是 [https://www.douban.com/group/CDzufang/discussion](https://www.douban.com/group/CDzufang/discussion) ,把配置文件中换成对应url即可
 
 ## 如何运行项目
+### 从docker-compose启动(推荐)
+1. 将docker-compose.yml拷贝到本地，并确保他们在相同目录下(请确保已安装`docker`和`docker-compose`)  
+```yml
+version: '3.7'
+services:
+  douban:
+    image: yazzyk/douban:latest
+    container_name: douban
+    volumes:
+      - ${DOUBAN_ROOT}/config.toml:/app/config.toml
+      - ${DOUBAN_ROOT}/logs:/app/logs 
+```
+以上的${DOUBAN_ROOT}为配置文件和日志文件的存放目录，可以自行修改
+2. 运行
+```bash
+docker-compose up -d
+```
+
+### 从docker启动
+```bash
+docker pull yazzyk/douban:latest
+docker run -d --name douban -v ${DOUBAN_ROOT}/config.toml:/app/config.toml -v ${DOUBAN_ROOT}/logs:/app/logs yazzyk/douban:latest
+```
+以上的${DOUBAN_ROOT}为配置文件和日志文件的存放目录，可以自行修改
+
 ### 自行编译运行
 #### 1. 下载并安装 Golang  
 请参考: [https://go.dev/doc/install](https://go.dev/doc/install)
@@ -34,7 +59,11 @@ make
 ```
 
 ## docker构建
+> 构建依赖于makefile的构建结果
 ```bash
 docker build -t <IMAGE_NAME> .
 ```
-
+or 
+```bash
+docker-compose -f docker-compose.build.yml build
+```
