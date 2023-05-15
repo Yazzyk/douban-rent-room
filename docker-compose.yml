@@ -7,3 +7,5 @@ services:
       - ${DOUBAN_ROOT}/config.toml:/app/config.toml
       - ${DOUBAN_ROOT}/nutsDB:/app/nutsDB
       - ${DOUBAN_ROOT}/logs:/app/logs
+    ports:
+      - '5050:5050'

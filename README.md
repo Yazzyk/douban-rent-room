@@ -14,7 +14,10 @@ services:
     container_name: douban
     volumes:
       - ${DOUBAN_ROOT}/config.toml:/app/config.toml
-      - ${DOUBAN_ROOT}/logs:/app/logs 
+      - ${DOUBAN_ROOT}/nutsDB:/app/nutsDB
+      - ${DOUBAN_ROOT}/logs:/app/logs
+    ports:
+      - '5050:5050'
 ```
 以上的${DOUBAN_ROOT}为配置文件和日志文件的存放目录，可以自行修改
 2. 运行
