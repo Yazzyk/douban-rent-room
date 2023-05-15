@@ -11,7 +11,10 @@ type AppConfig struct {
 	Spider    SpiderConfig
 	DataClean DataCleanConfig
 	Logger    LoggerConfig
-	Api       struct {
+	DB        struct {
+		FileName string
+	}
+	Api struct {
 		Domain string
 		Port   int
 	}

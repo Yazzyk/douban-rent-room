@@ -6,6 +6,10 @@ Cron = ['0 0 6 * * *', '0 0 18 * * *']
 Domain = ""
 Port = 5050
 
+# 数据存储
+[DB]
+FileName = "db/bolt.db"
+
 # 爬虫
 [Spider]
 WebSite = "https://www.douban.com/group/szsh/discussion" # 定义爬取的网站

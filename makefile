@@ -39,8 +39,8 @@ build_darwin:
 	export GOOS=darwin; \
 	export GOARCH=amd64; \
 	go mod tidy -compat=1.20; \
-	go build -o ./build/$(APPNAME)_win_amd64/$(APPNAME) cmd/main.go
-	cp config.toml ./build/$(APPNAME)_win_amd64/config.toml
+	go build -o ./build/$(APPNAME)_darwin_amd64/$(APPNAME) cmd/main.go
+	cp config.toml ./build/$(APPNAME)_darwin_amd64/config.toml
 
 build_linux_arm:
 	@echo "linux arm版"

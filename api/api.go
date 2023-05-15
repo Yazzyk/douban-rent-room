@@ -17,7 +17,7 @@ func Routers() {
 	)
 	app.Use(cors.New())
 	app.Use(logger.New(logger.Config{
-		Format: fmt.Sprintf("%s ${status} ${method} ${path}", time.Now().Format("2006-01-02 15:04:05")),
+		Format: fmt.Sprintf("%s ${status} ${method} ${path} \n", time.Now().Format("2006-01-02 15:04:05")),
 	}))
 
 	app.Mount("/info", info.Router())
