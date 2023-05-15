@@ -15,19 +15,23 @@
             margin-right: auto;
             text-align: center;
         }
+
         h1 {
             font-size: 36px;
             text-align: center;
         }
+
         p {
             margin: 0 0 10px;
         }
-        .infos{
+
+        .infos {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
 
         }
+
         .info {
             width: 200px;
             /*border: 1px solid #ccc;*/
@@ -37,6 +41,7 @@
             margin-bottom: 10px;
             text-align: center;
         }
+
         .more {
             width: 150px;
             height: 30px;
@@ -64,7 +69,10 @@
     {{range .Data}}
     <div class="info">
         <h6><a href="{{.Link}}">{{ .Title }}</a></h6>
-        <p>发布时间：{{ .Date }}</p>
+        <p>作者: <a href="{{.AuthorLink}}">{{.Author}}</a></p>
+        <p>回应: {{.CommentCount}} 条</p>
+        <p>发布时间: {{.DateStr}}</p>
+        <p><a href="{{$.Domain}}/report?id={{.AuthorID}}&name={{.Author}}" class="more">屏蔽该用户发布的信息</a></p>
     </div>
     {{end}}
 </div>

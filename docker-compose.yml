@@ -5,4 +5,5 @@ services:
     container_name: douban
     volumes:
       - ${DOUBAN_ROOT}/config.toml:/app/config.toml
+      - ${DOUBAN_ROOT}/nutsDB:/app/nutsDB
       - ${DOUBAN_ROOT}/logs:/app/logs

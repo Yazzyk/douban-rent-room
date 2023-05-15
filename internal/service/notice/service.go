@@ -59,12 +59,14 @@ func emailSender(data []models.HouseInfo) {
 		return
 	}
 	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, map[string]interface{}{
+	t := make(map[string]interface{})
+	t = map[string]interface{}{
 		"Data":   data,
 		"Black":  config.App.DataClean.BlackList,
 		"Day":    config.App.Spider.TimeLimit,
 		"Domain": config.App.Api.Domain,
-	})
+	}
+	err = tmpl.Execute(&buf, t)
 	if err != nil {
 		logrus.Error(err)
 		return
