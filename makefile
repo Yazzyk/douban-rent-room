@@ -1,6 +1,6 @@
 .PHONY: build build_linux build_windows build_darwin build_linux_arm build_darwin_arm build_docker
 
-APPNAME = douban-rent-room
+APPNAME = douban
 
 all: build
 

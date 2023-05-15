@@ -11,4 +11,4 @@ RUN echo -e  "http://mirrors.aliyun.com/alpine/v3.4/main\nhttp://mirrors.aliyun.
 
 RUN chmod 777 /app/douban-rent-room
 
-CMD ["./douban-rent-room"]
+CMD ["./douban"]
