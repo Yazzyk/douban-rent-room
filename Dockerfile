@@ -1,7 +1,7 @@
 FROM alpine:3.17
 WORKDIR /app
 
-COPY ./build/douban-rent-room_linux_amd64/ /app
+COPY ./build/douban_linux_amd64/ /app
 
 RUN echo -e  "http://mirrors.aliyun.com/alpine/v3.4/main\nhttp://mirrors.aliyun.com/alpine/v3.4/community" >  /etc/apk/repositories \
     && apk update && apk add tzdata vim \
@@ -9,6 +9,6 @@ RUN echo -e  "http://mirrors.aliyun.com/alpine/v3.4/main\nhttp://mirrors.aliyun.
     && echo "Shanghai/Asia" > /etc/timezone \
     && apk del tzdata
 
-RUN chmod 777 /app/douban-rent-room
+RUN chmod 777 /app/douban
 
 CMD ["./douban"]
