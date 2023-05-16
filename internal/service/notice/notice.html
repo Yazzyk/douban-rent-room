@@ -10,7 +10,7 @@
             line-height: 1.42857143;
             color: #333;
             background-color: #fff;
-            width: 1024px;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
@@ -28,12 +28,11 @@
         .infos {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
-
+            justify-content: space-around;
         }
 
         .info {
-            width: 200px;
+            width: 230px;
             /*border: 1px solid #ccc;*/
             border-radius: 8px;
             background-color: #99CCFF;
@@ -43,8 +42,8 @@
         }
 
         .more {
-            width: 150px;
-            height: 30px;
+            width: 200px;
+            height: 50px;
             color: #fff;
             text-align: center;
             display: block;
@@ -53,10 +52,11 @@
             border-radius: 3px;
             background: #333399;
             text-decoration: none;
-            line-height: 30px;
+            line-height: 50px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 20px;
+            font-size: 19px;
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
 <div class="infos">
     {{range .Data}}
     <div class="info">
-        <h6><a href="{{.Link}}">{{ .Title }}</a></h6>
+        <h3><a href="{{.Link}}">{{ .Title }}</a></h3>
         <p>作者: <a href="{{.AuthorLink}}">{{.Author}}</a></p>
         <p>回应: {{.CommentCount}} 条</p>
         <p>发布时间: {{.DateStr}}</p>
