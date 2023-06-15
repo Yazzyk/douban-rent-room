@@ -62,7 +62,7 @@
 </head>
 <body>
 <h1>房源信息</h1>
-<p>近{{.Day}}天的房源信息如下，请及时查看</p>
+<p>近{{.Day}}天的房源信息如下,共获取到{{len .Data}}条房源信息,请及时查看</p>
 <a class="more" href="{{.Domain}}/info" οnclick="return false;">获取最新</a>
 <p>屏蔽关键词: {{.Black}}</p>
 <div class="infos">
@@ -71,6 +71,7 @@
         <h3><a href="{{.Link}}">{{ .Title }}</a></h3>
         <p>作者: <a href="{{.AuthorLink}}">{{.Author}}</a></p>
         <p>回应: {{.CommentCount}} 条</p>
+        <p>数据来源: {{.DataFrom}}</p>
         <p>发布时间: {{.DateStr}}</p>
         <p><a href="{{$.Domain}}/report?id={{.AuthorID}}&name={{.Author}}" class="more">屏蔽该用户发布的信息</a></p>
     </div>

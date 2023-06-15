@@ -37,7 +37,7 @@ type AppConfig struct {
 }
 
 type SpiderConfig struct {
-	WebSite   string
+	WebSite   []string
 	TimeLimit int
 	Cookie    string
 }

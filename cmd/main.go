@@ -6,6 +6,7 @@ import (
 	"github.com/yazzyk/douban-rent-room/api"
 	"github.com/yazzyk/douban-rent-room/internal/config"
 	"github.com/yazzyk/douban-rent-room/internal/db/bolt"
+	"github.com/yazzyk/douban-rent-room/internal/models"
 	"github.com/yazzyk/douban-rent-room/internal/service/dataClean"
 	"github.com/yazzyk/douban-rent-room/internal/service/notice"
 	"github.com/yazzyk/douban-rent-room/internal/service/spider"
@@ -21,7 +22,11 @@ func main() {
 	for _, cron := range config.App.Cron {
 		c.AddFunc(cron, func() {
 			logrus.Info("====== Run ======")
-			notice.Run(dataClean.Run(spider.Run()))
+			var result []models.HouseInfo
+			for _, url := range config.App.Spider.WebSite {
+				result = append(result, spider.Run(url)...)
+			}
+			notice.Run(dataClean.Run(result))
 			logrus.Info("====== End ======")
 		})
 		c.Start()

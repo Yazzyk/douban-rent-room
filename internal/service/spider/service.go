@@ -15,13 +15,13 @@ import (
 	"time"
 )
 
-func Run() (result []models.HouseInfo) {
+func Run(website string) (result []models.HouseInfo) {
 	logrus.Info("开始爬取数据")
 	start := 0
 	endTime := time.Now().Add(-time.Duration(config.App.Spider.TimeLimit) * 24 * time.Hour)
 	backUser := bolt.View("report")
 	for {
-		pageResp, err := resty.New().R().SetHeader("Cookie", config.App.Spider.Cookie).Get(fmt.Sprintf("%s?start=%d&type=new", config.App.Spider.WebSite, start))
+		pageResp, err := resty.New().R().SetHeader("Cookie", config.App.Spider.Cookie).Get(fmt.Sprintf("%s?start=%d&type=new", website, start))
 		if err != nil {
 			logrus.Error(err)
 			return
@@ -31,6 +31,8 @@ func Run() (result []models.HouseInfo) {
 			logrus.Error(err)
 			return
 		}
+
+		webTitle := doc.Find("title").First().Text()
 
 		doc.Find("table.olt tr").Each(func(i int, selection *goquery.Selection) {
 			if i == 0 {
@@ -61,6 +63,7 @@ func Run() (result []models.HouseInfo) {
 				AuthorLink:   userLinkStr,
 				AuthorID:     userID,
 				Date:         &date,
+				DataFrom:     webTitle,
 				DateStr:      date.Format("2006-01-02 15:04"),
 				CommentCount: int(count),
 			})
@@ -73,7 +76,7 @@ func Run() (result []models.HouseInfo) {
 		}
 
 		if len(result) != 0 && result[len(result)-1].Date.Unix() < endTime.Unix() {
-			logrus.Infof("共有%d条", len(result))
+			logrus.Infof("[%s]共有%d条", webTitle, len(result))
 			return
 		}
 		start += 30
