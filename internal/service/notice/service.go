@@ -77,5 +77,5 @@ func emailSender(data []models.HouseInfo) {
 		logrus.Error(err)
 		return
 	}
-	logrus.Info("邮件发送成功, 一共%d条数据", len(data))
+	logrus.Infof("邮件发送成功, 一共%d条数据", len(data))
 }

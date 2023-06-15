@@ -8,6 +8,7 @@ import (
 	"github.com/yazzyk/douban-rent-room/internal/db/bolt"
 	"github.com/yazzyk/douban-rent-room/internal/models"
 	"github.com/yazzyk/douban-rent-room/internal/service/dataClean"
+	"github.com/yazzyk/douban-rent-room/internal/service/dataSort"
 	"github.com/yazzyk/douban-rent-room/internal/service/notice"
 	"github.com/yazzyk/douban-rent-room/internal/service/spider"
 	"github.com/yazzyk/douban-rent-room/pkg/log"
@@ -26,7 +27,7 @@ func main() {
 			for _, url := range config.App.Spider.WebSite {
 				result = append(result, spider.Run(url)...)
 			}
-			notice.Run(dataClean.Run(result))
+			notice.Run(dataSort.Sort(dataClean.Run(result)))
 			logrus.Info("====== End ======")
 		})
 		c.Start()

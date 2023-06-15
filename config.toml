@@ -1,10 +1,11 @@
 # cron 表达式 精确到秒 每天早上10点执行
 Cron = ['0 0 6 * * *', '0 0 18 * * *']
+Sort = 'time' # 排序方式 time: 按时间排序, default: 默认排序(根据website配置的网站顺序排序)
 
 # API服务
 [Api]
-Domain = ""
-Port = 5050
+Domain = "" # API服务的域名,即通过点击这个域名即可访问到API服务
+Port = 5050 # 端口
 
 # 数据存储
 [DB]
@@ -12,7 +13,7 @@ FileName = "db/bolt.db"
 
 # 爬虫
 [Spider]
-WebSite = "https://www.douban.com/group/szsh/discussion" # 定义爬取的网站
+WebSite = ["https://www.douban.com/group/szsh/discussion"] # 定义爬取的网站,可多个
 Cookie = ''
 TimeLimit = 5 # 定义爬取的时间限制 /天
 
@@ -22,7 +23,7 @@ BlackList = ["合租", "求", "找", "盐田", "龙岗", "坪山", "大鹏", "�
 
 [Logger]
 Level = "debug"
-Formatter = "text"
+Formatter = "text" # log 输出格式 text 或 json
 Path = "logs/run.log"
 
 # 通知

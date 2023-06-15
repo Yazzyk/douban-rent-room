@@ -1,4 +1,4 @@
-FROM alpine:3.17 as builder
+FROM golang:1.20.5-buster as builder
 LABEL MAINTAINER='yazzyk<root@shroot.dev>'
 WORKDIR /app
 
@@ -6,7 +6,7 @@ RUN mkdir -p /app
 
 COPY . /app
 
-RUN cd /app && make
+RUN cd /app && make build_linux
 
 
 FROM alpine:3.17

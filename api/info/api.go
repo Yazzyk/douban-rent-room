@@ -6,6 +6,7 @@ import (
 	"github.com/yazzyk/douban-rent-room/internal/config"
 	"github.com/yazzyk/douban-rent-room/internal/models"
 	"github.com/yazzyk/douban-rent-room/internal/service/dataClean"
+	"github.com/yazzyk/douban-rent-room/internal/service/dataSort"
 	"github.com/yazzyk/douban-rent-room/internal/service/notice"
 	"github.com/yazzyk/douban-rent-room/internal/service/spider"
 	"net/http"
@@ -27,7 +28,7 @@ func getInfo(c *fiber.Ctx) error {
 	for _, url := range config.App.Spider.WebSite {
 		result = append(result, spider.Run(url)...)
 	}
-	notice.Run(dataClean.Run(result))
+	notice.Run(dataSort.Sort(dataClean.Run(result)))
 	logrus.Info("====== API End ======")
 	return c.SendStatus(http.StatusOK)
 }

@@ -8,6 +8,7 @@ import (
 
 type AppConfig struct {
 	Cron      []string
+	Sort      string
 	Spider    SpiderConfig
 	DataClean DataCleanConfig
 	Logger    LoggerConfig
