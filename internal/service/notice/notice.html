@@ -65,6 +65,10 @@
 <p>近{{.Day}}天的房源信息如下,共获取到{{len .Data}}条房源信息,请及时查看</p>
 <a class="more" href="{{.Domain}}/info" οnclick="return false;">获取最新</a>
 <p>屏蔽关键词: {{.Black}}</p>
+<p>屏蔽用户: {{range $key, $value := .BackUser}}
+    <a href="https://www.douban.com/people/{{$key}}" target="_blank">{{$value}}</a>,&nbsp;&nbsp;
+    {{end}}
+</p>
 <div class="infos">
     {{range .Data}}
     <div class="info">

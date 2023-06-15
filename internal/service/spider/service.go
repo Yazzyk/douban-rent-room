@@ -7,7 +7,6 @@ import (
 	"github.com/go-resty/resty/v2"
 	"github.com/sirupsen/logrus"
 	"github.com/yazzyk/douban-rent-room/internal/config"
-	"github.com/yazzyk/douban-rent-room/internal/db/bolt"
 	"github.com/yazzyk/douban-rent-room/internal/models"
 	"os"
 	"strconv"
@@ -19,7 +18,6 @@ func Run(website string) (result []models.HouseInfo) {
 	logrus.Info("开始爬取数据")
 	start := 0
 	endTime := time.Now().Add(-time.Duration(config.App.Spider.TimeLimit) * 24 * time.Hour)
-	backUser := bolt.View("report")
 	for {
 		pageResp, err := resty.New().R().SetHeader("Cookie", config.App.Spider.Cookie).Get(fmt.Sprintf("%s?start=%d&type=new", website, start))
 		if err != nil {
@@ -48,13 +46,6 @@ func Run(website string) (result []models.HouseInfo) {
 			userName := user.Text()
 			userLinkList := strings.Split(userLinkStr, "/")
 			userID := userLinkList[len(userLinkList)-2]
-
-			// 黑名单用户检查
-			name, exist := backUser[userID]
-			if exist {
-				logrus.Warnf("用户[ %s ]已被屏蔽，跳过其发布信息", name)
-				return
-			}
 
 			result = append(result, models.HouseInfo{
 				Title:        title,

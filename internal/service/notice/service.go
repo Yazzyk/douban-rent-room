@@ -8,6 +8,7 @@ import (
 	"github.com/jordan-wright/email"
 	"github.com/sirupsen/logrus"
 	"github.com/yazzyk/douban-rent-room/internal/config"
+	"github.com/yazzyk/douban-rent-room/internal/db/bolt"
 	"github.com/yazzyk/douban-rent-room/internal/models"
 	"html/template"
 	"net/smtp"
@@ -53,6 +54,7 @@ func emailSender(data []models.HouseInfo) {
 	mail.From = config.App.Notice.Email.From
 	mail.To = config.App.Notice.Email.To
 	mail.Subject = "豆瓣租房信息"
+	backUser := bolt.View("report")
 	tmpl, err := template.New("notice").Parse(noticeTemplate)
 	if err != nil {
 		logrus.Error(err)
@@ -61,10 +63,11 @@ func emailSender(data []models.HouseInfo) {
 	var buf bytes.Buffer
 	t := make(map[string]interface{})
 	t = map[string]interface{}{
-		"Data":   data,
-		"Black":  config.App.DataClean.BlackList,
-		"Day":    config.App.Spider.TimeLimit,
-		"Domain": config.App.Api.Domain,
+		"Data":     data,
+		"Black":    config.App.DataClean.BlackList,
+		"Day":      config.App.Spider.TimeLimit,
+		"Domain":   config.App.Api.Domain,
+		"BackUser": backUser,
 	}
 	err = tmpl.Execute(&buf, t)
 	if err != nil {
