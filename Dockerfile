@@ -23,7 +23,11 @@ RUN apt install -y apt-transport-https ca-certificates vim tzdata
 
 # 修改时区为中国
 ENV TZ=Asia/Shanghai
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "deb http://th.archive.ubuntu.com/ubuntu jammy main" | sudo tee -a /etc/apt/sources.list &&  \
+    sudo apt update &&  \
+    sudo apt install libc6
+
 
 RUN chmod 777 /app/douban
 
