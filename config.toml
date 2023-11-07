@@ -14,8 +14,12 @@ FileName = "db/bolt.db"
 # 爬虫
 [Spider]
 WebSite = ["https://www.douban.com/group/szsh/discussion"] # 定义爬取的网站,可多个
-Cookie = ''
 TimeLimit = 5 # 定义爬取的时间限制 /天
+
+[CookieCloud]
+ServerHost = "https://cookiecloud.shroot.dev"
+UUID = ""
+Password = ""
 
 # 数据清洗
 [DataClean]

@@ -6,6 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/go-resty/resty/v2"
 	"github.com/sirupsen/logrus"
+	"github.com/yazzyk/cookieCloudSDK"
 	"github.com/yazzyk/douban-rent-room/internal/config"
 	"github.com/yazzyk/douban-rent-room/internal/models"
 	"os"
@@ -18,8 +19,13 @@ func Run(website string) (result []models.HouseInfo) {
 	logrus.Info("开始爬取数据")
 	start := 0
 	endTime := time.Now().Add(-time.Duration(config.App.Spider.TimeLimit) * 24 * time.Hour)
+	cookie, err := GetCookie()
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
 	for {
-		pageResp, err := resty.New().R().SetHeader("Cookie", config.App.Spider.Cookie).Get(fmt.Sprintf("%s?start=%d&type=new", website, start))
+		pageResp, err := resty.New().R().SetHeader("Cookie", cookie).Get(fmt.Sprintf("%s?start=%d&type=new", website, start))
 		if err != nil {
 			logrus.Error(err)
 			return
@@ -72,4 +78,27 @@ func Run(website string) (result []models.HouseInfo) {
 		}
 		start += 30
 	}
+}
+
+func GetCookie() (cookieStr string, err error) {
+	cc, err := cookieCloudSDK.NewCookieCloudSDK(config.App.CookieCloud.ServerHost, config.App.CookieCloud.UUID, config.App.CookieCloud.Password)
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	cookieData, err := cc.GetCookie()
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	data, exist := cookieData.CookieData["douban.com"]
+	if !exist {
+		logrus.Error("未获取到[douban.com]的cookie")
+		return
+	}
+	for _, datum := range data {
+		cookieStr += fmt.Sprintf("%s=%s;", datum.Name, datum.Value)
+	}
+	logrus.Info("从CookieCloud获取到Cookie成功: ", cookieStr)
+	return
 }

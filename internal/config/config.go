@@ -35,12 +35,18 @@ type AppConfig struct {
 			Host     string
 		}
 	}
+	CookieCloud CookieCloudConfig
+}
+
+type CookieCloudConfig struct {
+	ServerHost string
+	UUID       string
+	Password   string
 }
 
 type SpiderConfig struct {
 	WebSite   []string
 	TimeLimit int
-	Cookie    string
 }
 
 type DataCleanConfig struct {
