@@ -18,15 +18,13 @@ COPY --from=builder /app/build/douban_linux_amd64 /app
 # 国内源
 #RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && sed -i 's|security.debian.org|mirrors.ustc.edu.cn/debian-security|g' /etc/apt/sources.list && apt update
 RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && apt update
-
-RUN apt install -y apt-transport-https ca-certificates vim tzdata
+RUN echo "deb http://th.archive.ubuntu.com/ubuntu jammy main" | tee -a /etc/apt/sources.list
+RUN apt update
+RUN apt install -y apt-transport-https ca-certificates vim tzdata libc6
 
 # 修改时区为中国
 ENV TZ=Asia/Shanghai
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "deb http://th.archive.ubuntu.com/ubuntu jammy main" | sudo tee -a /etc/apt/sources.list &&  \
-    sudo apt update &&  \
-    sudo apt install libc6
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 
 RUN chmod 777 /app/douban
