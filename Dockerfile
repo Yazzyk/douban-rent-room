@@ -1,4 +1,4 @@
-FROM golang:1.20.5-buster as builder
+FROM golang:1.21.3-bookworm as builder
 LABEL MAINTAINER='yazzyk<root@shroot.dev>'
 WORKDIR /app
 
