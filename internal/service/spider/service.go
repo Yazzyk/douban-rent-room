@@ -91,9 +91,14 @@ func GetCookie() (cookieStr string, err error) {
 		logrus.Error(err)
 		return
 	}
+	//logrus.Info("从CookieCloud获取到Cookie: ", cookieData)
 	data, exist := cookieData.CookieData["douban.com"]
 	if !exist {
-		logrus.Error("未获取到[douban.com]的cookie")
+		logrus.Warn("未获取到[douban.com]的cookie,尝试www.douban.com")
+		data, exist = cookieData.CookieData["www.douban.com"]
+		if !exist {
+			logrus.Error("未获取到Cookie")
+		}
 		return
 	}
 	for _, datum := range data {
