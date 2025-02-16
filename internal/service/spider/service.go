@@ -98,8 +98,8 @@ func GetCookie() (cookieStr string, err error) {
 		data, exist = cookieData.CookieData["www.douban.com"]
 		if !exist {
 			logrus.Error("未获取到Cookie")
+			return
 		}
-		return
 	}
 	for _, datum := range data {
 		cookieStr += fmt.Sprintf("%s=%s;", datum.Name, datum.Value)
