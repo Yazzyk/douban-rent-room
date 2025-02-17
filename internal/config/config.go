@@ -52,7 +52,12 @@ type SpiderConfig struct {
 
 type DataCleanConfig struct {
 	//DistrictList []string
-	BlackList []string
+	BlackList      []string
+	CozeClientID   string
+	CozePrivateKey string
+	CozePublicKey  string
+	WorkflowID     string
+	Requirement    string
 }
 
 type LoggerConfig struct {

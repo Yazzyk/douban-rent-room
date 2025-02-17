@@ -17,14 +17,20 @@ WebSite = ["https://www.douban.com/group/szsh/discussion"] # 定义爬取的网�
 TimeLimit = 5 # 定义爬取的时间限制 /天
 Cookie = "" # 手动输入备用cookie,优先使用cookieCloud的cookie，当获取不到cookie时使用此cookie
 
+
 [CookieCloud]
-ServerHost = "https://cookiecloud.shroot.dev"
+ServerHost = ""
 UUID = ""
 Password = ""
 
 # 数据清洗
 [DataClean]
 BlackList = ["合租", "求", "找", "盐田", "龙岗", "坪山", "大鹏", "宝安", "光明", "单间", "一室", "一房", "女生"]
+Requirement = ""
+CozeClientID = ""
+CozePrivateKey = ""
+CozePublicKey = ""
+WorkflowID = "7472270145865613339"
 
 [Logger]
 Level = "debug"
@@ -39,8 +45,8 @@ AppToken = '' # 微信推送的AppToken
 Uids = [] # 微信推送的UID
 [Notice.Email]
 Enable = true # 是否开启
-From = '豆瓣房源爬虫 <notice@shroot.dev>' # 邮件发送人
-User = 'notice@shroot.dev' # 邮箱账号
+From = '' # 邮件发送人
+User = '' # 邮箱账号
 Pwd = '' # 邮箱密码
 SmtpAddr = 'smtphz.qiye.163.com:25' # 邮件服务器
 Host = 'smtphz.qiye.163.com' # 邮件服务器

@@ -75,6 +75,8 @@
         <h3><a href="{{.Link}}">{{ .Title }}</a></h3>
         <p>作者: <a href="{{.AuthorLink}}">{{.Author}}</a></p>
         <p>回应: {{.CommentCount}} 条</p>
+        <p>AI筛选原因: {{.AIReason}}</p>
+        <p>AI预测通勤时间: {{.CommutingTime}}</p>
         <p>数据来源: {{.DataFrom}}</p>
         <p>发布时间: {{.DateStr}}</p>
         <p><a href="{{$.Domain}}/report?id={{.AuthorID}}&name={{.Author}}" class="more">屏蔽该用户发布的信息</a></p>
