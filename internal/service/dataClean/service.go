@@ -53,12 +53,12 @@ func cozeAIClear(dataList []models.HouseInfo) (result []models.HouseInfo, err er
 		logrus.Error(err)
 		return
 	}
-	tokenResp, err := jwtOauthClient.GetAccessToken(context.Background(), nil)
-	if err != nil {
-		logrus.Error(err)
-		return
-	}
-	logrus.Info(tokenResp)
+	//tokenResp, err := jwtOauthClient.GetAccessToken(context.Background(), nil)
+	//if err != nil {
+	//	logrus.Error(err)
+	//	return
+	//}
+	//logrus.Info(tokenResp)
 	cozeCli := coze.NewCozeAPI(coze.NewJWTAuth(jwtOauthClient, nil), coze.WithBaseURL("https://api.coze.cn"))
 	cookie, err := spider.GetCookie()
 	if err != nil {
@@ -76,7 +76,7 @@ func cozeAIClear(dataList []models.HouseInfo) (result []models.HouseInfo, err er
 			logrus.Error(pageErr)
 			continue
 		}
-		logrus.Info(pageResp.String())
+		//logrus.Info(pageResp.String())
 		resp, aierr := cozeCli.Workflows.Runs.Create(context.Background(), &coze.RunWorkflowsReq{
 			WorkflowID: config.App.DataClean.WorkflowID,
 			Parameters: map[string]interface{}{
