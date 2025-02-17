@@ -15,6 +15,7 @@ FileName = "db/bolt.db"
 [Spider]
 WebSite = ["https://www.douban.com/group/szsh/discussion"] # 定义爬取的网站,可多个
 TimeLimit = 5 # 定义爬取的时间限制 /天
+Cookie = "" # 手动输入备用cookie,优先使用cookieCloud的cookie，当获取不到cookie时使用此cookie
 
 [CookieCloud]
 ServerHost = "https://cookiecloud.shroot.dev"

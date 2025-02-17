@@ -47,6 +47,7 @@ type CookieCloudConfig struct {
 type SpiderConfig struct {
 	WebSite   []string
 	TimeLimit int
+	Cookie    string
 }
 
 type DataCleanConfig struct {

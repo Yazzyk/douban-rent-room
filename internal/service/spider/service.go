@@ -2,6 +2,7 @@ package spider
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/go-resty/resty/v2"
@@ -22,7 +23,11 @@ func Run(website string) (result []models.HouseInfo) {
 	cookie, err := GetCookie()
 	if err != nil {
 		logrus.Error(err)
-		return
+		cookie = config.App.Spider.Cookie
+		if cookie == "" {
+			logrus.Error("未获取到Cookie")
+			return
+		}
 	}
 	for {
 		pageResp, err := resty.New().R().SetHeader("Cookie", cookie).Get(fmt.Sprintf("%s?start=%d&type=new", website, start))
@@ -95,11 +100,8 @@ func GetCookie() (cookieStr string, err error) {
 	data, exist := cookieData.CookieData["douban.com"]
 	if !exist {
 		logrus.Warn("未获取到[douban.com]的cookie,尝试www.douban.com")
-		data, exist = cookieData.CookieData["www.douban.com"]
-		if !exist {
-			logrus.Error("未获取到Cookie")
-			return
-		}
+		err = errors.New("未获取到[douban.com]的cookie")
+		return
 	}
 	for _, datum := range data {
 		cookieStr += fmt.Sprintf("%s=%s;", datum.Name, datum.Value)
