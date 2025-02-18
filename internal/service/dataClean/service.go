@@ -14,7 +14,7 @@ import (
 )
 
 func Run(dataList []models.HouseInfo) (result []models.HouseInfo) {
-	logrus.Info("数据清洗")
+	logrus.Info("数据清洗，目前共有[ %d ]条数据", len(dataList))
 	backUser := bolt.View("report")
 LIST:
 	for _, info := range dataList {
@@ -32,6 +32,7 @@ LIST:
 		}
 		result = append(result, info)
 	}
+	logrus.Info("黑民单数据清洗完成，目前共有[ %d ]条数据", len(result))
 	var err error
 	result, err = cozeAIClear(result)
 	if err != nil {
@@ -43,7 +44,7 @@ LIST:
 
 // ai 数据清洗
 func cozeAIClear(dataList []models.HouseInfo) (result []models.HouseInfo, err error) {
-	logrus.Info("AI数据清洗")
+	logrus.Info("AI数据清洗, 共有[ %d ]条数据", len(dataList))
 	jwtOauthClient, err := coze.NewJWTOAuthClient(coze.NewJWTOAuthClientParam{
 		ClientID:      config.App.DataClean.CozeClientID,
 		PublicKey:     config.App.DataClean.CozePublicKey,
@@ -100,6 +101,7 @@ func cozeAIClear(dataList []models.HouseInfo) (result []models.HouseInfo, err er
 			result = append(result, info)
 		}
 	}
+	logrus.Info("AI数据清洗完成, 共有[ %d ]条数据", len(result))
 	return
 }
 
